@@ -24,10 +24,12 @@ import com.frontendmasters.coffeemasters.R
 import com.frontendmasters.coffeemasters.ui.theme.Alternative1
 import com.frontendmasters.coffeemasters.ui.theme.CardBackground
 
-@Preview
 @Composable
 fun MenuPage(dataManager: DataManager) {
     LazyColumn {
+        item {
+            Text("${dataManager.menu.count()}")
+        }
         items(5) {
             Card(
                 elevation = 2.dp,
