@@ -2,9 +2,9 @@ package com.frontendmasters.coffeemasters.pages
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import com.frontendmasters.coffeemasters.DataManager
 
-@Preview
 @Composable
-fun OrderPage() {
+fun OrderPage(dataManager: DataManager) {
     
 }
