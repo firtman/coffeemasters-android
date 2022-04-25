@@ -1,9 +1,9 @@
-package com.frontendmasters.coffeemasters
+package com.example.coffemastersdemo
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
@@ -22,22 +22,36 @@ import com.frontendmasters.coffeemasters.ui.theme.Alternative1
 import com.frontendmasters.coffeemasters.ui.theme.OnPrimary
 import com.frontendmasters.coffeemasters.ui.theme.Primary
 
-data class NavPage(var name: String, var icon: ImageVector,
-                   var route: String)
+data class NavPage(var name: String, var icon: ImageVector, var route: String)
 
 object Routes {
-    val MenuPage = NavPage("Menu", Icons.Outlined.Menu, "menu")
-    val OffersPage = NavPage("Offers", Icons.Outlined.Star, "menu")
-    val OrderPage = NavPage("My Order", Icons.Outlined.ShoppingCart, "menu")
-    val InfoPage = NavPage("Info", Icons.Outlined.Info, "menu")
+    var MenuPage = NavPage("Menu", Icons.Outlined.Menu, "menu")
+    var OffersPage = NavPage("Offers", Icons.Outlined.Star, "offers")
+    var OrderPage =  NavPage("My Order", Icons.Outlined.ShoppingCart, "order")
+    var InfoPage =  NavPage("Info", Icons.Outlined.Info, "info")
 
     val pages = listOf(MenuPage, OffersPage, OrderPage, InfoPage)
 }
 
-@Preview
+@Preview(showBackground = true, widthDp = 400)
 @Composable
-fun NavBarItem_Preview() {
-    NavBarItem(page = Routes.MenuPage, modifier = Modifier.padding(8.dp))
+fun NavBar(selectedRoute: String = Routes.MenuPage.route, onChange: (String)->Unit = {}) {
+    Row(horizontalArrangement = Arrangement.SpaceEvenly,
+        modifier = Modifier
+            .background(Primary)
+            .padding(8.dp)
+            .fillMaxWidth()
+    ) {
+        for (page in Routes.pages) {
+            NavBarItem(page,
+                selected = selectedRoute == page.route,
+                modifier = Modifier
+                    .clickable {
+                        onChange(page.route)
+                    }
+            )
+        }
+    }
 }
 
 @Composable

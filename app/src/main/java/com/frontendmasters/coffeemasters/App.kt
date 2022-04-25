@@ -8,10 +8,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.coffemastersdemo.NavBar
 import com.frontendmasters.coffeemasters.ui.theme.CoffeeMastersTheme
 
 @Preview
@@ -24,18 +27,24 @@ fun App_Preview() {
 
 @Composable
 fun App() {
+    val selectedRoute = remember {
+        mutableStateOf("menu")
+    }
     Scaffold(
-        topBar = {
-            TopAppBar() {
-                AppTitle()
-            }
+        topBar = { TopAppBar {
+            AppTitle()
+        }},
+        content = {
+           OffersPage()
         },
         bottomBar = {
-            Text("I'm a bottom bar")
+            NavBar(
+                selectedRoute = selectedRoute.value,
+                onChange = {
+                    selectedRoute.value = it
+                })
         }
-    ) {
-        OffersPage()
-    }
+    )
 }
 
 @Composable
