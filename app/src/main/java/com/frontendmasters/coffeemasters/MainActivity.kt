@@ -42,7 +42,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun FirstComposable() {
     var name = remember { mutableStateOf("") }
-    
+
     Column() {
         Text("Hello ${name.value}",
             modifier = Modifier
