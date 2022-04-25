@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
@@ -27,18 +28,20 @@ import com.frontendmasters.coffeemasters.ui.theme.CardBackground
 @Composable
 fun MenuPage(dataManager: DataManager) {
     LazyColumn {
-        item {
-            Text("${dataManager.menu.count()}")
-        }
-        items(5) {
-            Card(
-                elevation = 2.dp,
-                shape = RoundedCornerShape(12.dp),
-                modifier = Modifier
-                    .background(CardBackground)
-                    .padding(12.dp)
-            ) {
-                ProductItem(product = Product(1, "Dummy", 1.25, ""), onAdd = {})
+        items(dataManager.menu) {
+            Text(it.name)
+            it.products.forEach {
+                Card(
+                    elevation = 2.dp,
+                    shape = RoundedCornerShape(12.dp),
+                    modifier = Modifier
+                        .background(CardBackground)
+                        .padding(12.dp)
+                ) {
+                    ProductItem(it, onAdd = {
+                        dataManager.cartAdd(it)
+                    })
+                }
             }
         }
     }
