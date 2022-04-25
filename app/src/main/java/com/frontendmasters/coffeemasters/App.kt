@@ -15,6 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.coffemastersdemo.NavBar
+import com.example.coffemastersdemo.Routes
+import com.frontendmasters.coffeemasters.pages.InfoPage
+import com.frontendmasters.coffeemasters.pages.MenuPage
+import com.frontendmasters.coffeemasters.pages.OrderPage
 import com.frontendmasters.coffeemasters.ui.theme.CoffeeMastersTheme
 
 @Preview
@@ -35,13 +39,19 @@ fun App() {
             AppTitle()
         }},
         content = {
-           OffersPage()
+           when(selectedRoute.value) {
+               Routes.MenuPage.route -> MenuPage()
+               Routes.OffersPage.route -> OffersPage()
+               Routes.OrderPage.route -> OrderPage()
+               Routes.InfoPage.route -> InfoPage()
+           }
+
         },
         bottomBar = {
             NavBar(
                 selectedRoute = selectedRoute.value,
-                onChange = {
-                    selectedRoute.value = it
+                onChange = { route ->
+                    selectedRoute.value = route
                 })
         }
     )

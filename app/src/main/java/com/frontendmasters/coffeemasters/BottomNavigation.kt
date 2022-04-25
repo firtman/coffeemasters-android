@@ -62,7 +62,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
             imageVector = page.icon,
             contentDescription = page.name,
             colorFilter = ColorFilter.tint(
-                if (selected) Alternative1 else OnPrimary
+                if (selected) OnPrimary else Alternative1
             ),
             modifier = Modifier
                 .padding(bottom = 8.dp)
@@ -70,7 +70,7 @@ fun NavBarItem(page: NavPage, selected: Boolean = false, modifier: Modifier = Mo
         )
         Text(page.name,
             fontSize = 12.sp,
-            color = if (selected) Alternative1 else OnPrimary
+            color = if (selected) OnPrimary else Alternative1
         )
     }
 }
